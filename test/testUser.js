@@ -23,7 +23,7 @@ describe("Testing the User Facade", function () {
     await mongoose.disconnect();
   })
   
-  var users = [];
+  //var users = [];
   /* Setup the database in a known state (2 users) BEFORE EACH test */
   beforeEach(async function () {
     await User.deleteMany({});
@@ -39,7 +39,7 @@ describe("Testing the User Facade", function () {
   });
 
   it("Should Find Kurt Wonnegut by Username", async function () {
-    var user = await userFacade.findByUsername("kwcle");
+    var user = await userFacade.findByUsername("kw");
     expect(user.firstName).to.be.equal("Kurt");
   });
 

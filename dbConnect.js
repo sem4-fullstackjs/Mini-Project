@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 function connect(connectionString) {
-  return mongoose.connect(connectionString, { useNewUrlParser: true });
+  return mongoose.connect(connectionString, { useNewUrlParser: true, useCreateIndex: true });
 }
 mongoose.connection.on('connected', function () {
   console.log('Mongoose default connection open ');
