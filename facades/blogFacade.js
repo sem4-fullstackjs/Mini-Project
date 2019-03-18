@@ -1,18 +1,25 @@
 // var mongoose = require("mongoose");
 var LocationBlog = require("../models/LocationBlog");
+var User = require("../models/User")
 
 function getAllBlogs() {
   return LocationBlog.find({}).exec()
 }
 
 function addLocationBlog(info, img, longitude, latitude, author, created) {
-  return newBLog = LocationBlog({ info, img, pos: { longitude, latitude }, author, created }).save()
+  return LocationBlog({ info, img, pos: { longitude, latitude }, author, created }).save()
 }
 
-function likeLocationBlog(id) {
-  return null
-  // Start by finding the desired blog
-  // Update it so the likedBy array has the users ID in it.
+// TODO: Rewrite this function!
+likeLocationBlog = async (user_id, locationblog_id) => {
+  const user = await User.find({ _id: user_id }).exec()
+  const locationblogs = await LocationBlog.find({ _id: locationblog_id })
+  
+  let locationblog = locationblogs[0]
+  locationblog.likedBy.push(user[0]._id)
+
+  const response = await locationblog.save()
+  return response
 }
 
 function findByInfo(info) {

@@ -39,12 +39,12 @@ describe("Testing the LocationBlog Facade", function () {
     ])
   })
 
-  it("Should find all location blogs", async function () {
+  it("Should Find all Location Blogs", async function () {
     var blogs = await blogFacade.getAllBlogs()
-    expect(blogs.length).to.be.equal(2);
+    expect(blogs.length).to.be.equal(2)
   });
   
-  it("Should add Burger King", async function () {
+  it("Should Add Burger King", async function () {
     var blog = await blogFacade.addLocationBlog("Burger King", "Test img string", 12.345, 56.789, users[0]._id)
     expect(blog).to.not.be.null
     expect(blog.info).to.be.equal("Burger King")
@@ -54,12 +54,17 @@ describe("Testing the LocationBlog Facade", function () {
 
   it("Should Find CPH-Business Lyngby by Info", async function () {
     var blog = await blogFacade.findByInfo("CPH-Business Lyngby")
-    expect(blog.info).to.be.equal("CPH-Business Lyngby");
+    expect(blog.info).to.be.equal("CPH-Business Lyngby")
   })
 
   it("Should Find CPH-Business Lyngby by ID", async function () {
-    var blog = await blogFacade.findById(blogs[0]._id);
-    expect(blog.info).to.be.equal("CPH-Business Lyngby");
+    var blog = await blogFacade.findById(blogs[0]._id)
+    expect(blog.info).to.be.equal("CPH-Business Lyngby")
+  })
+
+  it("Should Add a Like to CPH Business Lyngby", async function () {
+    var blog = await blogFacade.likeLocationBlog(users[0]._id, blogs[0]._id)
+    expect(blog.likedBy.length).to.be.equal(1)
   })
 
 })
