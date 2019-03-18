@@ -64,7 +64,7 @@ describe("Testing the LocationBlog Facade", function () {
 
   it("Should Add a Like to CPH Business Lyngby", async function () {
     var blog = await blogFacade.likeLocationBlog(users[0]._id, blogs[0]._id)
-    expect(blog.likedBy.length).to.be.equal(1)
+    expect(blog.likedByCount).to.be.equal(1)
   })
 
 })
