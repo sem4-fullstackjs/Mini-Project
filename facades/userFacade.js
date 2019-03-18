@@ -19,22 +19,19 @@ function findById(user_id) {
 
 // TODO: Rewrite this function!
 async function addJobToUser(user_id, jobs) {
-  const users = await User.find({ _id: user_id }).exec()
+  const user = await User.findOne({ _id: user_id }).exec()
 
-  let user = users[0]
   user.job.push(jobs)
 
   const response = await user.save()
   return response
-
-  //return userJob = User({User: user, job: jobs}).save()
 }
 
 module.exports = {
   getAllUsers,
-  addUser,
   findByUsername,
   findById,
+  addUser,
   addJobToUser
 }
 
