@@ -22,7 +22,7 @@ describe("Testing the User Facade", function () {
   after(async function () {
     await mongoose.disconnect();
   })
-  
+
   //var users = [];
   /* Setup the database in a known state (2 users) BEFORE EACH test */
   beforeEach(async function () {
@@ -31,9 +31,17 @@ describe("Testing the User Facade", function () {
       { firstName: "Kurt", lastName: "Wonnegut", userName: "kw", password: "test", email: "a@b.dk" },
       { firstName: "Hanne", lastName: "Wonnegut", userName: "hw", password: "test", email: "b@b.dk" },
     ])
+    
+    jobs = [
+      { type: "Programmer", company: "CPH Business Lyngby", companyUrl: "cph.business.dk" },
+      { type: "Web Developer", company: "CPH Business Lyngby", companyUrl: "cph.business.dk" },
+      { type: "Store Clerk", company: "Netto", companyUrl: "netto.dk" },
+      { type: "Chef", company: "The American", companyUrl: "the-american.dk" },
+    ]
+  
   })
 
-  it("Should find all users (Kurt and Hanne)", async function () {
+  it("Should Find all Users (Kurt and Hanne)", async function () {
     var users = await userFacade.getAllUsers();
     expect(users.length).to.be.equal(2);
   });
@@ -48,7 +56,7 @@ describe("Testing the User Facade", function () {
     expect(user.firstName).to.be.equal("Kurt");
   });
 
-  it("Should add Peter Pan", async function () {
+  it("Should Add Peter Pan", async function () {
     var user = await userFacade.addUser("Peter", "Pan", "peter", "test", "a@b.dk");
     expect(user).to.not.be.null;
     expect(user.firstName).to.be.equal("Peter");
@@ -56,4 +64,9 @@ describe("Testing the User Facade", function () {
     expect(users.length).to.be.equal(3);
   });
 
+  it("Should Add a Job to Kurt (Programmer) ", async function () {
+    var user = await userFacade.addJobToUser(users[0]._id, jobs[0])
+    expect(user.job[0].type).to.be.equal("Programmer")
+  })
+  
 })

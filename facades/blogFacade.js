@@ -11,10 +11,10 @@ function addLocationBlog(info, img, longitude, latitude, author, created) {
 }
 
 // TODO: Rewrite this function!
-likeLocationBlog = async (user_id, locationblog_id) => {
+async function likeLocationBlog(user_id, locationblog_id) {
   const user = await User.find({ _id: user_id }).exec()
   const locationblogs = await LocationBlog.find({ _id: locationblog_id })
-  
+
   let locationblog = locationblogs[0]
   locationblog.likedBy.push(user[0]._id)
 
