@@ -17,21 +17,20 @@ async function makeData() {
   try {
     var userInfos = [ // Creating Users
       {
-        firstName: "a", lastName: "a", userName: "a", password: "a", email: "a@a.dk",
+        firstName: "Rylan", lastName: "Miller", userName: "RyMi", password: "!C@4vEtv", email: "rylan4@yahoo.com",
         job: [
-          { type: "t1", company: "c1", companyUrl: "url" },
-          { type: "t2", company: "c2", companyUrl: "url" }]
+          { type: "Uber Driver", company: "UBER", companyUrl: "uber.com" },
+          { type: "Web Designer", company: "Microsoft", companyUrl: "microsoft.com" }]
       },
       {
-        firstName: "b", lastName: "b", userName: "b", password: "b", email: "b@b.dk",
+        firstName: "Jase", lastName: "Johnson", userName: "JaJo", password: "O5d!K9Ka", email: "jase1@yahoo.comk",
         job: [
-          { type: "t1", company: "cc1", companyUrl: "url" }]
+          { type: "Chef", company: "McDonalds", companyUrl: "mcdonalds.com" }]
       },
       {
-        firstName: "c", lastName: "c", userName: "c", password: "c", email: "c@c.dk",
+        firstName: "Miller", lastName: "Jackson", userName: "MiJack", password: "9@(JFppB", email: "mill1@yahoo.com",
         job: [
-          { type: "t1", company: "c1", companyUrl: "url" },
-          { type: "t2", company: "c2", companyUrl: "url" }]
+          { type: "Nurse", company: "Naestved Sygehus", companyUrl: "naestved.sygehus.dk" }]
       }
     ]
     await User.deleteMany({})
