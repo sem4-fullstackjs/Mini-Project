@@ -4,9 +4,10 @@ var connect = require("../dbConnect.js");
 
 
 //See (for the three lines below): https://github.com/Automattic/mongoose/issues/1251
-mongoose.models = {};
-mongoose.modelSchemas = {};
-mongoose.connection = {};
+
+// mongoose.models = {};
+// mongoose.modelSchemas = {};
+// mongoose.connection = {};
 
 var userFacade = require("../facades/userFacade");
 var User = require("../models/User");
@@ -68,5 +69,4 @@ describe("Testing the User Facade", function () {
     var user = await userFacade.addJobToUser(users[0]._id, jobs[0])
     expect(user.job[0].type).to.be.equal("Programmer")
   })
-  
 })
