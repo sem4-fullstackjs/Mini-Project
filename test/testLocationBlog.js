@@ -36,7 +36,7 @@ describe("Testing the LocationBlog Facade", function () {
     await LocationBlog.deleteMany({});
     blogs = await LocationBlog.insertMany([
       { info: "CPH-Business Lyngby", pos: { longitude: 12.511, latitude: 55.770 }, author: users[0]._id },
-      { info: "Test Site", pos: { longitude: 32.3329, latitude: 27.939 }, author: users[1]._id }
+      { info: "Test Site", pos: { longitude: 32.3329, latitude: 27.939 }, author: users[1]._id, likedBy: users[0]._id }
     ])
   })
 
@@ -68,6 +68,10 @@ describe("Testing the LocationBlog Facade", function () {
     expect(blog.likedByCount).to.be.equal(1)
   })
 
+  it("Should NOT add a like to Test Site - User has already liked", async function () {
+    var blog = await blogFacade.likeLocationBlog(users[0]._id, blogs[1]._id)
+    expect(blog.likedByCount).to.be.equal(1)
+  })
 })
 
 

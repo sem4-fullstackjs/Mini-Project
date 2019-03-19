@@ -17,7 +17,6 @@ function findById(user_id) {
   return User.findById({ _id: user_id }).exec()
 }
 
-// TODO: Rewrite this function!
 async function addJobToUser(user_id, jobs) {
   const user = await User.findOne({ _id: user_id }).exec()
 
