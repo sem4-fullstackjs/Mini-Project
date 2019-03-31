@@ -2,9 +2,9 @@ const mongoose = require('mongoose')
 const expect = require('chai').expect
 let connect = require('../dbConnect.js')
 
-let blogFacade = require('../facades/blogFacade')
-let userFacade = require('../facades/userFacade')
-let LocationBlog = require('../models/LocationBlog')
+var blogFacade = require('../facades/blogFacade')
+var LocationBlog = require('../models/LocationBlog')
+var User = require('../models/User')
 
 describe('Testing the LocationBlog Facade', function() {
 	/* Connect to the TEST-DATABASE */
@@ -19,8 +19,25 @@ describe('Testing the LocationBlog Facade', function() {
 
 	/* Setup the database in a known state (2 blogs, and 2 users) BEFORE EACH test */
 	beforeEach(async function() {
+		await User.deleteMany({})
+		users = await User.insertMany([
+			{
+				firstName: 'Kurt',
+				lastName: 'Wonnegut',
+				userName: 'kw',
+				password: 'test',
+				email: 'a@b.dk'
+			},
+			{
+				firstName: 'Hanne',
+				lastName: 'Wonnegut',
+				userName: 'hw',
+				password: 'test',
+				email: 'b@b.dk'
+			}
+		])
+
 		await LocationBlog.deleteMany({})
-		users = await userFacade.getAllUsers()
 		blogs = await LocationBlog.insertMany([
 			{
 				info: 'CPH-Business Lyngby',
