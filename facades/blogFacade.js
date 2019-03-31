@@ -1,7 +1,7 @@
 // var mongoose = require("mongoose");
 var LocationBlog = require('../models/LocationBlog')
 
-function getAllBlogs() {
+function getAllLocationBlogs() {
 	return LocationBlog.find({}).exec()
 }
 
@@ -27,7 +27,7 @@ async function likeLocationBlog(userid, blogid) {
 }
 
 module.exports = {
-	getAllBlogs,
+	getAllLocationBlogs,
 	findByInfo,
 	findById,
 	addLocationBlog,

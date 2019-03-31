@@ -1,16 +1,10 @@
 const mongoose = require('mongoose')
 const expect = require('chai').expect
-var connect = require('../dbConnect.js')
+let connect = require('../dbConnect.js')
 
-//See (for the three lines below): https://github.com/Automattic/mongoose/issues/1251
-
-// mongoose.models = {};
-// mongoose.modelSchemas = {};
-// mongoose.connection = {};
-
-var blogFacade = require('../facades/blogFacade')
-var LocationBlog = require('../models/LocationBlog')
-var User = require('../models/User')
+let blogFacade = require('../facades/blogFacade')
+let userFacade = require('../facades/userFacade')
+let LocationBlog = require('../models/LocationBlog')
 
 describe('Testing the LocationBlog Facade', function() {
 	/* Connect to the TEST-DATABASE */
@@ -25,25 +19,8 @@ describe('Testing the LocationBlog Facade', function() {
 
 	/* Setup the database in a known state (2 blogs, and 2 users) BEFORE EACH test */
 	beforeEach(async function() {
-		await User.deleteMany({})
-		users = await User.insertMany([
-			{
-				firstName: 'Kurt',
-				lastName: 'Wonnegut',
-				userName: 'kw',
-				password: 'test',
-				email: 'a@b.dk'
-			},
-			{
-				firstName: 'Hanne',
-				lastName: 'Wonnegut',
-				userName: 'hw',
-				password: 'test',
-				email: 'b@b.dk'
-			}
-		])
-
 		await LocationBlog.deleteMany({})
+		users = await userFacade.getAllUsers()
 		blogs = await LocationBlog.insertMany([
 			{
 				info: 'CPH-Business Lyngby',
@@ -60,7 +37,7 @@ describe('Testing the LocationBlog Facade', function() {
 	})
 
 	it('Should Find all Location Blogs', async function() {
-		var blogs = await blogFacade.getAllBlogs()
+		var blogs = await blogFacade.getAllLocationBlogs()
 		expect(blogs.length).to.be.equal(2)
 	})
 
@@ -74,7 +51,7 @@ describe('Testing the LocationBlog Facade', function() {
 		)
 		expect(blog).to.not.be.null
 		expect(blog.info).to.be.equal('Burger King')
-		var blogs = await blogFacade.getAllBlogs()
+		var blogs = await blogFacade.getAllLocationBlogs()
 		expect(blogs.length).to.be.equal(3)
 	})
 
