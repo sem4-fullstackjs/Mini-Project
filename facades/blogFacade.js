@@ -13,8 +13,15 @@ function findById(id) {
 	return LocationBlog.findById({ _id: id }).exec()
 }
 
-function addLocationBlog(info, img, longitude, latitude, author, created) {
-	return LocationBlog({ info, img, pos: { longitude, latitude }, author, created }).save()
+async function addLocationBlog(info, img, pos, author) {
+	var locationBlog = new LocationBlog({
+		info,
+		img,
+		pos,
+		author
+	})
+	await locationBlog.save()
+	return locationBlog
 }
 
 // TODO: Rewrite this function - Should not allow users to like the same post more then once!

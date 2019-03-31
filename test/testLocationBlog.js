@@ -40,54 +40,53 @@ describe('Testing the LocationBlog Facade', function() {
 		await LocationBlog.deleteMany({})
 		blogs = await LocationBlog.insertMany([
 			{
-				info: 'CPH-Business Lyngby',
-				pos: { longitude: 12.511, latitude: 55.77 },
+				info: 'Test Site-01',
+				pos: { longitude: 12, latitude: 14 },
 				author: users[0]._id
 			},
 			{
-				info: 'Test Site',
-				pos: { longitude: 32.3329, latitude: 27.939 },
+				info: 'Test Site-02',
+				pos: { longitude: 16, latitude: 18 },
 				author: users[1]._id,
 				likedBy: users[0]._id
 			}
 		])
 	})
 
-	it('Should Find all Location Blogs', async function() {
+	it('Should Find All LocationBlogs', async function() {
 		var blogs = await blogFacade.getAllLocationBlogs()
 		expect(blogs.length).to.be.equal(2)
 	})
 
-	it('Should Add Burger King', async function() {
+	it('Should Add Test Site-03', async function() {
 		var blog = await blogFacade.addLocationBlog(
-			'Burger King',
-			'Test img string',
-			12.345,
-			56.789,
+			'Test Site-03',
+			'img.png',
+			{ longitude: 13, latitude: 13 },
 			users[0]._id
 		)
 		expect(blog).to.not.be.null
-		expect(blog.info).to.be.equal('Burger King')
+		expect(blog.info).to.be.equal('Test Site-03')
 		var blogs = await blogFacade.getAllLocationBlogs()
 		expect(blogs.length).to.be.equal(3)
 	})
 
-	it('Should Find CPH-Business Lyngby by Info', async function() {
-		var blog = await blogFacade.findByInfo('CPH-Business Lyngby')
-		expect(blog.info).to.be.equal('CPH-Business Lyngby')
+	it('Should Find Test Site-01 by Info', async function() {
+		var blog = await blogFacade.findByInfo('Test Site-01')
+		expect(blog.info).to.be.equal('Test Site-01')
 	})
 
-	it('Should Find CPH-Business Lyngby by ID', async function() {
+	it('Should Find Test Site-01 by ID', async function() {
 		var blog = await blogFacade.findById(blogs[0]._id)
-		expect(blog.info).to.be.equal('CPH-Business Lyngby')
+		expect(blog.info).to.be.equal('Test Site-01')
 	})
 
-	it('Should Add a Like to CPH Business Lyngby', async function() {
+	it('Should Add a Like to Test Site-01', async function() {
 		var blog = await blogFacade.likeLocationBlog(users[0]._id, blogs[0]._id)
 		expect(blog.likedByCount).to.be.equal(1)
 	})
 
-	it('Should NOT add a like to Test Site - User has already liked', async function() {
+	it('Should NOT Add a Like to Test Site-02', async function() {
 		var blog = await blogFacade.likeLocationBlog(users[0]._id, blogs[1]._id)
 		expect(blog.likedByCount).to.be.equal(1)
 	})

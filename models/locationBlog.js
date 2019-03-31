@@ -9,7 +9,7 @@ var LocationBlogSchema = new Schema({
 		latitude: { type: Number, required: true }
 	},
 	author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-	likedBy: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+	likedBy: [{ type: Schema.Types.ObjectId, ref: 'User' }], //unique: true
 	created: { type: Date, default: Date.now },
 	lastUpdated: Date
 })
