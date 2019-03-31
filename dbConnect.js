@@ -1,16 +1,20 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
 function connect(connectionString) {
-  return mongoose.connect(connectionString, { useNewUrlParser: true, useCreateIndex: true });
+	return mongoose.connect(connectionString, {
+		useNewUrlParser: true,
+		useCreateIndex: true,
+		useFindAndModify: false
+	})
 }
-mongoose.connection.on('connected', function () {
-  console.log('Mongoose default connection open ');
-});
-mongoose.connection.on('disconnected', function () {
-  console.log('Mongoose connection closed ');
-});
-mongoose.connection.on('error', function (err) {
-  console.log('Mongoose default connection error: ' + err);
-});
+mongoose.connection.on('connected', function() {
+	console.log('Mongoose default connection open ')
+})
+mongoose.connection.on('disconnected', function() {
+	console.log('Mongoose connection closed ')
+})
+mongoose.connection.on('error', function(err) {
+	console.log('Mongoose default connection error: ' + err)
+})
 
-module.exports = connect;
+module.exports = connect

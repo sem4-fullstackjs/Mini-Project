@@ -1,39 +1,35 @@
 // var mongoose = require("mongoose");
-var LocationBlog = require("../models/LocationBlog");
-var User = require("../models/User")
+var LocationBlog = require('../models/LocationBlog')
 
 function getAllBlogs() {
-  return LocationBlog.find({}).exec()
+	return LocationBlog.find({}).exec()
 }
 
 function findByInfo(info) {
-  return LocationBlog.findOne({ info }).exec()
+	return LocationBlog.findOne({ info }).exec()
 }
 
 function findById(id) {
-  return LocationBlog.findById({ _id: id }).exec()
+	return LocationBlog.findById({ _id: id }).exec()
 }
 
 function addLocationBlog(info, img, longitude, latitude, author, created) {
-  return LocationBlog({ info, img, pos: { longitude, latitude }, author, created }).save()
+	return LocationBlog({ info, img, pos: { longitude, latitude }, author, created }).save()
 }
 
 // TODO: Rewrite this function - Should not allow users to like the same post more then once!
-async function likeLocationBlog(user_id, locationblog_id) {
-  const user = await User.findOne({ _id: user_id }).exec()
-  const locationblog = await LocationBlog.findOne({ _id: locationblog_id })
-
-  // Add a functionality, that checks if the user has already liked this post
-  locationblog.likedBy.push(user._id)
-
-  const response = await locationblog.save()
-  return response
+async function likeLocationBlog(userid, blogid) {
+	return LocationBlog.findOneAndUpdate(
+		{ _id: blogid },
+		{ $push: { likedBy: userid } },
+		{ new: true }
+	).exec()
 }
 
 module.exports = {
-  getAllBlogs,
-  findByInfo,
-  findById,
-  addLocationBlog,
-  likeLocationBlog
+	getAllBlogs,
+	findByInfo,
+	findById,
+	addLocationBlog,
+	likeLocationBlog
 }
