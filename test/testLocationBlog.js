@@ -87,7 +87,13 @@ describe('Testing the LocationBlog Facade', function() {
 	})
 
 	it('Should NOT Add a Like to Test Site-02', async function() {
-		var blog = await blogFacade.likeLocationBlog(users[0]._id, blogs[1]._id)
-		expect(blog.likedByCount).to.be.equal(1)
+		try {
+			var blog = await blogFacade.likeLocationBlog(users[0]._id, blogs[1]._id)
+			expect(blog.likedByCount).to.be.equal(1)
+		} catch (err) {
+			expect(err.message).to.be.equal('You have already liked this blog')
+		}
+		//expect(blog.likedByCount).to.be.equal(1)
+		//expect(blogFacade.likeLocationBlog.bind(blogFacade).to.throw())
 	})
 })

@@ -26,6 +26,10 @@ async function addLocationBlog(info, img, pos, author) {
 
 // TODO: Rewrite this function - Should not allow users to like the same post more then once!
 async function likeLocationBlog(userid, blogid) {
+	const p = await LocationBlog.findById(blogid)
+	if (p.likedBy.indexOf(userid) >= 0) {
+		throw new Error('You have already liked this blog')
+	}
 	return LocationBlog.findOneAndUpdate(
 		{ _id: blogid },
 		{ $push: { likedBy: userid } },
