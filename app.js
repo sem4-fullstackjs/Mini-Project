@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
 var apiRouter = require('./routes/api')
 
+var http = require('http')
 var app = express()
 
 // view engine setup
@@ -43,4 +44,16 @@ app.use(function(err, req, res, next) {
 	res.render('error')
 })
 
-module.exports = app
+function testServer(port) {
+	return new Promise((resolve, reject) => {
+		let server = http.createServer(app)
+		server.listen(port, () => {
+			resolve(server)
+		})
+	})
+}
+
+module.exports = {
+	app,
+	testServer
+}
