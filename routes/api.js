@@ -28,13 +28,14 @@ router.get('/users', async function(req, res, next) {
 })
 
 /* GET - user by userName */
-router.get('/users/username=:userName', async function(req, res, next) {
-	var userName = req.params.userName
+router.get('/users/:username', async function(req, res, next) {
+	var userName = req.params.username
 	res.json({ users: await userFacade.findByUsername(userName) })
 })
 
 /* GET - user by id */
-router.get('/users/id=:id', async function(req, res, next) {
+// seemse like findById dosnt work
+router.get('/users/:id', async function(req, res, next) {
 	var id = req.params.id
 	res.json({ users: await userFacade.findById(id) })
 })
@@ -58,7 +59,7 @@ router.get('/blogs', async function(req, res, next) {
 })
 
 /* GET - locationblog by id */
-router.get('/blogs/id=:id', async function(req, res, next) {
+router.get('/blogs/:id', async function(req, res, next) {
 	var id = req.params.id
 	res.json({ blogs: await blogFacade.findById(id) })
 })

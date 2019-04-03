@@ -13,6 +13,7 @@ function findByUsername(username) {
 	return User.findOne({ userName: username }).exec()
 }
 
+// seemse like findById dosnt work
 function findById(user_id) {
 	return User.findById({ _id: user_id }).exec()
 }

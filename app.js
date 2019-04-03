@@ -45,6 +45,8 @@ app.use(function(err, req, res, next) {
 })
 
 function testServer(port) {
+	var connect = require('./dbConnect')
+	connect(require('./settings').TEST_DB_URI)
 	return new Promise((resolve, reject) => {
 		let server = http.createServer(app)
 		server.listen(port, () => {
