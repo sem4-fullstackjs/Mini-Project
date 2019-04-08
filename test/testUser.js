@@ -61,6 +61,7 @@ describe('Testing the User Facade', function() {
 
 	it('Should Find Kurt Wonnegut by ID', async function() {
 		var user = await userFacade.findById(users[0]._id)
+		console.log(users[0]._id)
 		expect(user.firstName).to.be.equal('Kurt')
 	})
 

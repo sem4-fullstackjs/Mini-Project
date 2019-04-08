@@ -11,7 +11,9 @@ router.post('/login', async function(req, res, next) {
 	const password = req.body.password
 	const latitude = req.body.latitude
 	const longitude = req.body.longitude
-	const distance = req.body.distance
+	const distance = req.body.distance * 1000
+	// We multiply by 1000 because the user has to insert the distance in km
+	// But we wan't to work with meters.
 
 	const response = await loginFacade.login(userName, password, latitude, longitude, distance)
 

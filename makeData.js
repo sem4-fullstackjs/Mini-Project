@@ -59,8 +59,9 @@ async function makeData() {
 		console.log(users)
 
 		var positions = [
-			positionCreator(10, 11, users[0]._id),
-			positionCreator(11, 12, users[1]._id, true)
+			positionCreator(2, 2, users[0]._id, true),
+			positionCreator(10, 10, users[1]._id, true),
+			positionCreator(11, 11, users[2]._id, true)
 		]
 
 		var blogs = [
