@@ -93,7 +93,5 @@ describe('Testing the LocationBlog Facade', function() {
 		} catch (err) {
 			expect(err.message).to.be.equal('You have already liked this blog')
 		}
-		//expect(blog.likedByCount).to.be.equal(1)
-		//expect(blogFacade.likeLocationBlog.bind(blogFacade).to.throw())
 	})
 })
