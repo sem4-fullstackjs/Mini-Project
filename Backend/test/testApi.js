@@ -45,7 +45,7 @@ describe('Testing the REST API', function() {
 		blogs = await LocationBlog.insertMany([
 			{
 				info: 'Test Site-01',
-				pos: { longitude: 12, latitude: 14 },
+				pos: { longitude: 11, latitude: 11 },
 				author: users[0]._id
 			},
 			{
@@ -63,29 +63,29 @@ describe('Testing the REST API', function() {
 	})
 
 	it('Should get a user by username - GET', async function() {
-		result = await fetch(`${URL}/users/kw`).then(res => res.json())
+		result = await fetch(`${URL}/users/username=kw`).then(res => res.json())
 		expect(result.users.firstName).to.be.equal('Kurt')
 	})
 
-	// it('Should get a user by ID - GET', async function() {
-	// 	let user_id = users[1]._id
-	// 	result = await fetch(`${URL}/users/${user_id}`).then(res => res.json())
-	// 	console.log('user_id', user_id)
-	// 	console.log('res', result)
-	// 	expect(result.users.firstName).to.be.equal('Hanne')
-	// })
+	it('Should get a user by ID - GET', async function() {
+		let user_id = users[1]._id
+		result = await fetch(`${URL}/users/id=${user_id}`).then(res => res.json())
+		expect(result.users.firstName).to.be.equal('Hanne')
+	})
 
-	// // it('Should create a new user - POST', async function() {})
+	it('Should get all locations - GET', async function() {
+		result = await fetch(`${URL}/blogs`).then(res => res.json())
+		expect(result.blogs.length).to.be.equal(2)
+	})
 
-	// it('Should get all locations - GET', async function() {
-	// 	result = await fetch(`${URL}/blogs`).then(res => res.json())
-	// 	expect(result.blogs.length).to.be.equal(2)
-	// })
+	it('Should get a location by ID - GET', async function() {
+		let blog_id = blogs[1]._id
+		result = await fetch(`${URL}/blogs/id=${blog_id}`).then(res => res.json())
+		expect(result.blogs.info).to.be.equal('Test Site-02')
+	})
 
-	// it('Should get a location by ID - GET', async function() {
-	// 	let blog_id = blogs[1]._id
-	// 	result = await fetch(`${URL}/blogs/${blog_id}`).then(res => res.json())
-	// 	expect(result.blogs.info).to.be.equal('Test-Site-02')
+	// it('Should create a new user - POST', async function() {
+	// 	let newUser = {username: 'Peter', password: 'secret', latitude: 12, longitude: 12, distance: 156}
 	// })
 
 	// it('Should create a new location - POST', async function() {})
