@@ -9,7 +9,7 @@ Backend
 
 
 
-# Notes
+## Notes
 
 In-order to test the REST API, i had issues starting the server, and having it connect to the right database. However, i managed to find a solution to the problem...
 
