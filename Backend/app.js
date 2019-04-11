@@ -1,6 +1,3 @@
-var connect = require('./dbConnect')
-connect(require('./settings').DEV_DB_URI)
-
 var createError = require('http-errors')
 var express = require('express')
 var path = require('path')
@@ -44,10 +41,16 @@ app.use(function(err, req, res, next) {
 	res.render('error')
 })
 
-function testServer(port) {
+function setDB(connectstring) {
 	var connect = require('./dbConnect')
-	connect(require('./settings').TEST_DB_URI)
+	connect(require('./settings')[connectstring])
+}
+
+app.setDB = setDB
+
+function testServer(port) {
 	return new Promise((resolve, reject) => {
+		app.setDB('TEST_DB_URI')
 		let server = http.createServer(app)
 		server.listen(port, () => {
 			resolve(server)

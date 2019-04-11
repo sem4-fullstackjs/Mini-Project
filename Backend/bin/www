@@ -18,7 +18,7 @@ app.set('port', port)
 /**
  * Create HTTP server.
  */
-
+app.setDB('DEV_DB_URI')
 var server = http.createServer(app)
 
 /**
