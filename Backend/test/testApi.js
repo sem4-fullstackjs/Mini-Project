@@ -85,7 +85,7 @@ describe('Testing the REST API', function() {
 	})
 
 	// it('Should create a new user - POST', async function() {
-	// 	let newUser = {username: 'Peter', password: 'secret', latitude: 12, longitude: 12, distance: 156}
+	//     let newUser = {username: 'Peter', password: 'secret', latitude: 12, longitude: 12, distance: 156}
 	// })
 
 	// it('Should create a new location - POST', async function() {})
